@@ -1,0 +1,59 @@
+.cards {
+  text-align: center;
+  h2 {
+    color: $softRed;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  h3 {
+    color: $grayishBlue;
+    letter-spacing: 4px;
+  }
+  &__container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__item {
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+
+  &__card {
+    position: relative;
+    margin-bottom: 1rem;
+
+    @include breakpoint-up(medium) {
+      margin-bottom: 1.375rem;
+    }
+
+    @include breakpoint-up(large) {
+      margin-bottom: 1.75rem;
+    }
+
+    div {
+      width: 4.375rem;
+      height: 2rem;
+      background-color: $darkDesaturatedBlue;
+      border-radius: 5px;
+
+      @include breakpoint-up(medium) {
+        width: 6.75rem;
+        height: 3.1875rem;
+      }
+
+      @include breakpoint-up(large) {
+        width: 9.125rem;
+        height: 4.375rem;
+      }
+    }
+    .upper {
+      opacity: 0.9;
+    }
+    .lower {
+    }
+  }
+}

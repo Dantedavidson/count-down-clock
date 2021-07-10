@@ -1,0 +1,26 @@
+.main {
+  height: calc(100vh - 10.625rem);
+  padding-top: 9.125rem;
+  padding-right: 1.375rem;
+  padding-left: 1.375rem;
+
+  @include breakpoint-up(medium) {
+    height: calc(100vh - 11.625rem);
+  }
+  @include breakpoint-up(large) {
+    height: calc(100vh - 12.625rem);
+  }
+
+  h1 {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5rem;
+    margin-bottom: 3.75rem;
+    @include breakpoint-up(medium) {
+      margin-bottom: 5.25rem;
+    }
+    @include breakpoint-up(large) {
+      margin-bottom: 6.75rem;
+    }
+  }
+}

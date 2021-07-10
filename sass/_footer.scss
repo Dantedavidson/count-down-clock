@@ -1,0 +1,34 @@
+.footer {
+  height: 10.625rem;
+  background-image: url("../images/pattern-hills.svg");
+  background-repeat: none;
+  background-position: center center;
+  background-size: cover;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  justify-items: center;
+
+  @include breakpoint-up(medium) {
+    height: 11.625rem;
+  }
+  @include breakpoint-up(large) {
+    height: 12.625rem;
+  }
+
+  &__social {
+    a {
+      font-size: 1.625rem;
+      color: $iconGray;
+      cursor: pointer;
+
+      &:hover {
+        color: $softRed;
+      }
+    }
+    a:not(:last-child) {
+      margin-right: 2rem;
+    }
+  }
+}
