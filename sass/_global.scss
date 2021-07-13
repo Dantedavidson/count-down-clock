@@ -28,7 +28,8 @@ h1 {
   }
 }
 
-h2 {
+h2,
+div {
   font-size: 1.625rem;
 
   @include breakpoint-up(medium) {

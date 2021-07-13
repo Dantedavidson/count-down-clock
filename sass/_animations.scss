@@ -1,0 +1,15 @@
+@keyframes rotate {
+  from {
+    background-color: $darkDesaturatedBlue;
+    transform: rotateX(0deg);
+  }
+
+  to {
+    background-color: $darkishDesaturatedBlue;
+    transform: rotateX(180deg);
+  }
+}
+
+.rotate {
+  animation: rotate 800ms linear;
+}
