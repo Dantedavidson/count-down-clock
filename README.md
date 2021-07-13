@@ -1,6 +1,6 @@
 # Frontend Mentor - Launch countdown timer solution
 
-This is a solution to the [Launch countdown timer challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/launch-countdown-timer-N0XkGfyz-). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
+This is a solution to the [Launch countdown timer challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/launch-countdown-timer-N0XkGfyz-). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
 ## Table of contents
 
@@ -24,7 +24,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: (https://github.com/Dantedavidson/sunny-side-landing-page)
+- Solution URL: (https://github.com/Dantedavidson/count-down-clock)
 - Live Site URL: (https://dantedavidson.github.io/sunny-side-landing-page/)
 
 ## My process

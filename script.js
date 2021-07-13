@@ -69,13 +69,6 @@ class Timer {
         this.minutes * 60
     );
   }
-
-  countDown() {
-    this.getDays();
-    this.getHours();
-    this.getMinutes();
-    this.getSeconds();
-  }
 }
 
 class Clock {
@@ -141,7 +134,7 @@ class Clock {
 }
 
 const timer = new Timer();
-timer.getLaunchDate;
+timer.getLaunchDate();
 const clock = new Clock(timer);
 
 clock.startTime(false);
