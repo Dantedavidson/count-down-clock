@@ -8,6 +8,13 @@
   font-weight: 700;
 }
 
+body {
+  height: 100vh;
+  background: url("../images/bg-stars.svg") top/100% 80% no-repeat, url("../images/pattern-hills.svg") bottom/100% 20% no-repeat, -webkit-gradient(linear, left top, left bottom, from(#1e1f29), to(#191a24));
+  background: url("../images/bg-stars.svg") top/100% 80% no-repeat, url("../images/pattern-hills.svg") bottom/100% 20% no-repeat, linear-gradient(to bottom, #1e1f29, #191a24);
+  background-repeat: no-repeat;
+}
+
 a,
 a:visited,
 a:focus {
@@ -17,6 +24,22 @@ a:focus {
 
 body {
   background-color: #1e1f29;
+}
+
+.content__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 1rem;
 }
 
 h1 {
@@ -56,6 +79,7 @@ div {
 }
 
 h3 {
+  color: #8486a9;
   font-size: 0.375rem;
 }
 
@@ -89,35 +113,86 @@ h3 {
   }
 }
 
-@-webkit-keyframes rotate {
-  from {
-    background-color: #2b2d45;
+@-webkit-keyframes flip-down-front {
+  0% {
     -webkit-transform: rotateX(0deg);
             transform: rotateX(0deg);
+    background-color: #2b2d45;
+    color: #fb6087;
   }
-  to {
+  100% {
+    -webkit-transform: rotateX(-180deg);
+            transform: rotateX(-180deg);
     background-color: #343650;
-    -webkit-transform: rotateX(180deg);
-            transform: rotateX(180deg);
+    color: #fb6087;
   }
 }
 
-@keyframes rotate {
-  from {
-    background-color: #2b2d45;
+@keyframes flip-down-front {
+  0% {
     -webkit-transform: rotateX(0deg);
             transform: rotateX(0deg);
+    background-color: #2b2d45;
+    color: #fb6087;
   }
-  to {
+  100% {
+    -webkit-transform: rotateX(-180deg);
+            transform: rotateX(-180deg);
     background-color: #343650;
-    -webkit-transform: rotateX(180deg);
-            transform: rotateX(180deg);
+    color: #fb6087;
   }
 }
 
-.rotate {
-  -webkit-animation: rotate 800ms linear;
-          animation: rotate 800ms linear;
+@-webkit-keyframes flip-down-back {
+  0% {
+    -webkit-transform: rotateY(180deg) rotateX(0deg);
+            transform: rotateY(180deg) rotateX(0deg);
+    background-color: #343650;
+    color: #fb6087;
+  }
+  100% {
+    -webkit-transform: rotateY(180deg) rotateX(180deg);
+            transform: rotateY(180deg) rotateX(180deg);
+    background-color: #2b2d45;
+    color: #fb6087;
+  }
+}
+
+@keyframes flip-down-back {
+  0% {
+    -webkit-transform: rotateY(180deg) rotateX(0deg);
+            transform: rotateY(180deg) rotateX(0deg);
+    background-color: #343650;
+    color: #fb6087;
+  }
+  100% {
+    -webkit-transform: rotateY(180deg) rotateX(180deg);
+            transform: rotateY(180deg) rotateX(180deg);
+    background-color: #2b2d45;
+    color: #fb6087;
+  }
+}
+
+@-webkit-keyframes fade-under {
+  0% {
+    background-color: #343650;
+    color: #fb6087;
+  }
+  100% {
+    background-color: #2b2d45;
+    color: #fb6087;
+  }
+}
+
+@keyframes fade-under {
+  0% {
+    background-color: #343650;
+    color: #fb6087;
+  }
+  100% {
+    background-color: #2b2d45;
+    color: #fb6087;
+  }
 }
 
 .main {
@@ -163,11 +238,12 @@ h3 {
 }
 
 .cards h3 {
-  color: #8486a9;
   letter-spacing: 4px;
 }
 
 .cards__container {
+  width: 20.625rem;
+  margin: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -176,13 +252,25 @@ h3 {
           justify-content: space-between;
 }
 
-.cards__item:not(:last-child) {
-  margin-right: 1rem;
+@media (min-width: 40em) {
+  .cards__container {
+    width: 31.25rem;
+  }
+}
+
+@media (min-width: 64em) {
+  .cards__container {
+    width: 41.875rem;
+  }
 }
 
 .cards__card {
   position: relative;
   margin-bottom: 1rem;
+  border-radius: 5px;
+  background-color: #2b2d45;
+  -webkit-box-shadow: 0px 8px rgba(0, 0, 0, 0.637);
+          box-shadow: 0px 8px rgba(0, 0, 0, 0.637);
   height: 4.25rem;
   width: 4.375rem;
   overflow: hidden;
@@ -190,6 +278,8 @@ h3 {
 
 @media (min-width: 40em) {
   .cards__card {
+    height: 6.5rem;
+    width: 6.8125rem;
     margin-bottom: 1.375rem;
   }
 }
@@ -202,59 +292,114 @@ h3 {
   }
 }
 
-.cards__card > div {
-  height: 50%;
+.cards .cover {
+  position: relative;
   width: 100%;
-  border-radius: 5px;
-  position: absolute;
-  overflow: hidden;
+  height: 100%;
 }
 
-.cards__card > div h2 {
+.cards .cover span {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  background-color: black;
+}
+
+.cards .cover::before, .cards .cover::after {
+  content: "";
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  height: 12px;
+  width: 8px;
+  background-color: black;
+}
+
+.cards .cover::before {
+  left: 0;
+  border-radius: 0 6px 6px 0;
+}
+
+.cards .cover::after {
+  right: 0;
+  border-radius: 6px 0 0 6px;
+}
+
+.cards .base {
+  display: block;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  color: #fb6087;
 }
 
-.cards__card div div {
+.cards .flap {
+  display: none;
   position: absolute;
   width: 100%;
-  height: 100%;
-  background-color: #2b2d45;
+  height: 50%;
+  left: 0;
+  top: 0;
   -webkit-transform-origin: 50% 100%;
           transform-origin: 50% 100%;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  overflow: hidden;
 }
 
-.cards__card__flip {
-  overflow: visible !important;
+.cards .flap::before {
+  content: attr(data-content);
+  position: absolute;
+  left: 50%;
 }
 
-.cards__card #flip div {
-  z-index: 3;
+.cards .flap.front::before, .cards .flap.under::before {
+  top: 100%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
-.cards__card__lower {
-  top: 50%;
+.cards .flap.back {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
 }
 
-.cards__card__lower div {
-  width: 100%;
-  height: 100%;
-  background-color: #343650 !important;
+.cards .flap.back::before {
+  top: 100%;
+  -webkit-transform: translate(-50%, -50%) rotateZ(180deg);
+          transform: translate(-50%, -50%) rotateZ(180deg);
 }
 
-.cards__card__lower h2 {
-  top: -50% !important;
+.cards .flap.over {
+  z-index: 2;
+}
+
+.cards .flap.under {
+  z-index: 1;
+}
+
+.cards .flap.front {
+  -webkit-animation: flip-down-front 300ms ease-in both;
+          animation: flip-down-front 300ms ease-in both;
+}
+
+.cards .flap.back {
+  -webkit-animation: flip-down-back 300ms ease-in both;
+          animation: flip-down-back 300ms ease-in both;
+}
+
+.cards .flap.under {
+  -webkit-animation: fade-under 300ms ease-in both;
+          animation: fade-under 300ms ease-in both;
 }
 
 .footer {
-  height: 10.625rem;
-  background-image: url("../images/pattern-hills.svg");
-  background-repeat: none;
-  background-position: center center;
-  background-size: cover;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -264,18 +409,6 @@ h3 {
       -ms-flex-align: center;
           align-items: center;
   justify-items: center;
-}
-
-@media (min-width: 40em) {
-  .footer {
-    height: 11.625rem;
-  }
-}
-
-@media (min-width: 64em) {
-  .footer {
-    height: 12.625rem;
-  }
 }
 
 .footer__social a {

@@ -19,54 +19,66 @@
     <title>Frontend Mentor | Launch countdown timer</title>
   </head>
   <body>
+    <div class="content__container">
     <main class="main">
       <h1>
         We're launching <br class="hide-for-tablet" />
         soon
       </h1>
 
-      <div class="cards cards__container">
-        <div class="cards__item">
-          <div class="cards__card">
-            <div class="upper"></div>
-            <div class="lower"></div>
-            <h2 id="days"></h2>
+    <div class="cards cards__container">
+     <div class="cards__item">
+       
+        <div id="days" class="cards__card">
+          <div class="cover">
+            <span></span>
           </div>
-          <h3>DAYS</h3>
+         <span class="base">00</span>
+         <div class="flap over front"></div>
+          <div class="flap over back"></div>
+          <div class="flap under"></div>
         </div>
-        <div class="cards__item">
-          <div class="cards__card">
-            <div class="upper"></div>
-            <div class="lower"></div>
-            <h2 id="hours"></h2>
+        <h3>DAYS</h3>
+      </div>
+      <div class="cards__item">
+        
+          <div id="hours" class="cards__card">
+            <div class="cover">
+              <span></span>
+            </div>
+            <span class="base">00</span>
+            <div class="flap over front"></div>
+            <div class="flap over back"></div>
+            <div class="flap under"></div>
           </div>
           <h3>HOURS</h3>
-        </div>
-        <div class="cards__item">
-          <div class="cards__card">
-            <div class="upper"></div>
-            <div class="lower"></div>
-            <h2 id="minutes"></h2>
-          </div>
+      </div>
+      <div class="cards__item">
+       
+            <div id="minutes" class="cards__card">
+              <div class="cover">
+                <span></span>
+              </div>
+              <span class="base">00</span>
+              <div class="flap over front"></div>
+              <div class="flap over back"></div>
+              <div class="flap under"></div>
+            </div>
+          
           <h3>MINUTES</h3>
-        </div>
-        <div class="cards__item">
-          <div id="seconds" class="cards__card">
-            <div id="upper" class="cards__card__upper">
-              <div></div>
-              <h2 class="number number__before"></h2>
-            </div>
-            <div id="flip" class="cards__card__flip">
-              <div></div>
-              <h2 class="number number__after"></h2>
-            </div>
-            <div id="lower" class="cards__card__lower">
-              <div></div>
-              <h2 class="number number__after"></h2>
-            </div>
+      </div>
+      <div class="cards__item">
+        <div id="seconds" class="cards__card">
+          <div class="cover">
+            <span></span>
           </div>
-          <h3>SECONDS</h3>
+          <span class="base">00 </span>
+          <div class="flap over front"></div>
+          <div class="flap over back"></div>
+          <div class="flap under"></div>
+          
         </div>
+        <h3>SECONDS</h3>
       </div>
     </main>
     <footer class="footer">
@@ -76,6 +88,7 @@
         <a href="#"><i class="fab fa-instagram"></i></a>
       </div>
     </footer>
-    <script src="script.js"></script>
+  </div>
+<script src="script.js"></script> 
   </body>
 </html>

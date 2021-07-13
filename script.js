@@ -1,15 +1,3 @@
-const flip = document.querySelectorAll(".cards__card__flip div");
-const upper = document.getElementById("upper");
-const lower = document.getElementById("lower");
-const h2 = document.querySelectorAll(".cards__card div h2");
-console.log(h2);
-flip.forEach((element) => {
-  console.log(element);
-  element.addEventListener("animationend", () => {
-    element.classList.remove("rotate");
-  });
-});
-
 class LocalStorage {
   static setLocalStorage(value) {
     localStorage.setItem("launchDate", value);
@@ -31,9 +19,7 @@ class Timer {
   }
 
   getLaunchDate() {
-    console.log(this.launchDate);
     if (!this.launchDate) {
-      console.log("went off");
       //Convert current date into seconds and add 10 days.
       this.launchDate = new Date().getTime() / 1000 + 864000;
       LocalStorage.setLocalStorage(this.launchDate);
@@ -44,6 +30,7 @@ class Timer {
     if (!this.launchDate) return;
     const temp = new Date().getTime() / 1000;
     this.days = Math.floor((this.launchDate - temp) / 86400);
+    return this.days;
   }
 
   getHours() {
@@ -52,6 +39,7 @@ class Timer {
     this.hours = Math.floor(
       (this.launchDate - temp - this.days * 86400) / 3600
     );
+    return this.hours;
   }
 
   getMinutes() {
@@ -60,12 +48,20 @@ class Timer {
     this.minutes = Math.floor(
       (this.launchDate - temp - this.days * 86400 - this.hours * 3600) / 60
     );
+    return this.minutes;
   }
 
   getSeconds() {
     if (!this.launchDate) return;
     const temp = new Date().getTime() / 1000;
     this.seconds = Math.floor(
+      this.launchDate -
+        temp -
+        this.days * 86400 -
+        this.hours * 3600 -
+        this.minutes * 60
+    );
+    return Math.floor(
       this.launchDate -
         temp -
         this.days * 86400 -
@@ -83,70 +79,72 @@ class Timer {
 }
 
 class Clock {
-  // constructor(dayCard, hourCard, minuteCard, secondCard, timer) {
-  //   this.dayCard = dayCard;
-  //   this.hourCard = hourCard;
-  //   this.minuteCard = minuteCard;
-  //   this.secondCard = secondCard;
-  //   this.timer = timer;
-  // }
-
-  getDOMElements() {
-    this.secondsFlip = document.querySelector(
-      "#seconds .cards__card__flip div"
-    );
-    this.secondsBefore = document.querySelector("#seconds .number__before");
-    this.secondsAfter = document.querySelectorAll("#seconds .number__after");
-    console.log(this.secondsBefore, this.secondsAfter);
+  constructor(timer) {
+    this.timer = timer;
+    this.days = document.getElementById("days");
+    this.hours = document.getElementById("hours");
+    this.minutes = document.getElementById("minutes");
+    this.seconds = document.getElementById("seconds");
   }
 
-  updateDOMClock() {
-    this.secondsBefore.innerText = timer.seconds - 1;
-    this.secondsAfter.forEach((element) => {
-      element.innerText = timer.seconds;
+  flip(unit, number) {
+    //store the current number data atribute value
+    const current = this[unit].dataset.number;
+
+    //set the data attribute to new number
+    this[unit].dataset.number = number;
+
+    //set the front data-content to the current number
+    this[unit].querySelector(".front").dataset.content = current;
+
+    //set back and under data-content to new number
+    this[unit].querySelectorAll(".back, .under").forEach((element) => {
+      element.dataset.content = number;
     });
+
+    //set .flap to display block
+    this[unit].querySelectorAll(".flap").forEach((element) => {
+      element.style.display = "block";
+    });
+
+    setTimeout(function () {
+      this[unit].querySelector(".base").innerText = number;
+      this[unit]
+        .querySelectorAll(".flap")
+        .forEach((element) => (element.style.display = "none"));
+    }, 350);
   }
 
-  animateCard(card) {
-    console.log(card);
-    card.classList.add("rotate");
+  jumpTo(unit, number) {
+    this[unit].dataset.number = number;
+    this[unit].querySelector(".base").innerText = number;
+  }
+
+  updateDOM(unit, number, flip) {
+    number = String(number);
+    //prepend 0 if only one digit
+    if (number.length === 1) number = `0${number}`;
+
+    //if the unit number doesnt equal the input number
+    if (this[unit].dataset.number !== number) {
+      if (flip) this.flip(unit, number);
+      else this.jumpTo(unit, number);
+    }
+  }
+
+  startTime(flip) {
+    this.updateDOM("days", this.timer.getDays(), flip);
+    this.updateDOM("hours", this.timer.getHours(), flip);
+    this.updateDOM("minutes", this.timer.getMinutes(), flip);
+    this.updateDOM("seconds", this.timer.getSeconds(), flip);
   }
 }
 
 const timer = new Timer();
-timer.getLaunchDate();
-// const clock = new Clock(
-//   document.getElementById("days"),
-//   document.getElementById("hours"),
-//   document.getElementById("minutes"),
-//   document.getElementById("seconds"),
-//   timer
-// );
-const clock = new Clock();
-clock.getDOMElements();
+timer.getLaunchDate;
+const clock = new Clock(timer);
 
-window.setInterval(function () {
-  timer.countDown();
-  clock.animateCard(clock.secondsFlip);
-  clock.updateDOMClock();
+clock.startTime(false);
+setInterval(function () {
+  clock.startTime(true);
 }, 1000);
-
-// this.dayCard.childNodes[1].innerText =
-//   timer.days < 10 ? `0${timer.days}` : timer.days;
-// this.dayCard.childNodes[3].innerText =
-//   timer.days < 10 ? `0${timer.days}` : timer.days;
-// console.log(this.dayCard.childNodes);
-
-// flip.classList.add("rotate");
-
-// this.dayCard.innerText = timer.days < 10 ? `0${timer.days}` : timer.days;
-// this.hourCard.innerText =
-//   timer.hours < 10 ? `0${timer.hours}` : timer.hours;
-// this.minuteCard.innerText =
-//   timer.minutes < 10 ? `0${timer.minutes}` : timer.minutes;
-// this.secondCard.innerText =
-//   timer.seconds < 10 ? `0${timer.seconds}` : timer.seconds;
-
-// h2.forEach((item) => {
-//   item.innerText = timer.seconds < 10 ? `0${timer.seconds}` : timer.seconds;
-// });

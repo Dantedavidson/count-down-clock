@@ -1,47 +1,38 @@
 .cards {
   text-align: center;
 
-  // div.upper {
-  //   position: relative;
-  // }
-
-  // div.lower {
-  //   color: $softRed;
-  //   overflow: hidden;
-  //   padding-bottom: 20%;
-  // }
-  // h2 {
-  //   color: $softRed;
-  //   position: absolute;
-  //   top: 50%;
-  //   left: 50%;
-  //   transform: translate(-50%, -50%);
-  // }
-
   h3 {
-    color: $grayishBlue;
     letter-spacing: 4px;
   }
 
   &__container {
+    width: 20.625rem;
+    margin: auto;
     display: flex;
     justify-content: space-between;
-  }
 
-  &__item {
-    &:not(:last-child) {
-      margin-right: 1rem;
+    @include breakpoint-up(medium) {
+      width: 31.25rem;
+    }
+
+    @include breakpoint-up(large) {
+      width: 41.875rem;
     }
   }
 
   &__card {
     position: relative;
     margin-bottom: 1rem;
+    border-radius: 5px;
+    background-color: $darkDesaturatedBlue;
+    box-shadow: 0px 8px rgba(0, 0, 0, 0.637);
     height: 4.25rem;
     width: 4.375rem;
     overflow: hidden;
 
     @include breakpoint-up(medium) {
+      height: 6.5rem;
+      width: 6.8125rem;
       margin-bottom: 1.375rem;
     }
 
@@ -50,100 +41,101 @@
       width: 9.25rem;
       margin-bottom: 1.75rem;
     }
+  }
+  .cover {
+    position: relative;
+    width: 100%;
+    height: 100%;
 
-    > div {
-      height: 50%;
-      width: 100%;
-      border-radius: 5px;
+    span {
       position: absolute;
-      overflow: hidden;
-
-      @include breakpoint-up(medium) {
-        // width: 6.75rem;
-        // height: 3.1875rem;
-      }
-
-      @include breakpoint-up(large) {
-        // width: 9.125rem;
-        // height: 4.375rem;
-      }
-
-      h2 {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-    }
-
-    div div {
-      position: absolute;
-
-      width: 100%;
-      height: 100%;
-      background-color: $darkDesaturatedBlue;
-      transform-origin: 50% 100%;
-    }
-
-    &__flip {
-      overflow: visible !important;
-    }
-    #flip div {
-      z-index: 3;
-    }
-
-    &__upper {
-    }
-
-    &__lower {
+      left: 0;
       top: 50%;
+      width: 100%;
+      height: 1px;
+      background-color: black;
+    }
+    &::before,
+    &::after {
+      content: "";
+      z-index: 10;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 12px;
+      width: 8px;
+      background-color: black;
+    }
 
-      div {
-        width: 100%;
-        height: 100%;
-        background-color: $darkishDesaturatedBlue !important;
+    &::before {
+      left: 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    &::after {
+      right: 0;
+      border-radius: 6px 0 0 6px;
+    }
+  }
+
+  .base {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: $softRed;
+  }
+
+  .flap {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    left: 0;
+    top: 0;
+    transform-origin: 50% 100%;
+    backface-visibility: hidden;
+    overflow: hidden;
+
+    &::before {
+      content: attr(data-content);
+      position: absolute;
+      left: 50%;
+    }
+
+    &.front::before,
+    &.under::before {
+      top: 100%;
+      transform: translate(-50%, -50%);
+    }
+
+    &.back {
+      transform: rotateY(180deg);
+      &::before {
+        top: 100%;
+        transform: translate(-50%, -50%) rotateZ(180deg);
       }
-      h2 {
-        top: -50% !important;
-      }
+    }
+
+    &.over {
+      z-index: 2;
+    }
+
+    &.under {
+      z-index: 1;
+    }
+
+    &.front {
+      animation: flip-down-front 300ms ease-in both;
+    }
+
+    &.back {
+      animation: flip-down-back 300ms ease-in both;
+    }
+
+    &.under {
+      animation: fade-under 300ms ease-in both;
     }
   }
 }
-
-// .upper {
-//   background-color: $darkDesaturatedBlue;
-//   transform-origin: 50% 100%;
-//   transform: perspective(200px);
-//   z-index: 3;
-//   //position: absolute;
-//   h2 {
-//     position: absolute;
-//     top: 100%;
-//   }
-//   overflow: hidden;
-// }
-
-// .flip {
-//   position: absolute;
-//   //display: none;
-//   top: 0;
-//   opacity: 1;
-//   background-color: $darkDesaturatedBlue;
-//   z-index: 4;
-//   transform-origin: 50% 100%;
-//   transform-style: preserve-3d;
-
-//   //backface-visibility: hidden;
-//   transform: perspective(200px);
-//   h2 {
-//     opacity: 1;
-//     transform: translate(-50%, -4%);
-//   }
-// }
-// .lower {
-//   top: 2rem;
-// }
-// .lower-back {
-//   top: 2rem;
-// }
-// }
