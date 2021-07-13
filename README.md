@@ -25,7 +25,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: (https://github.com/Dantedavidson/count-down-clock)
-- Live Site URL: (https://dantedavidson.github.io/sunny-side-landing-page/)
+- Live Site URL: (https://dantedavidson.github.io/count-down-clock/)
 
 ## My process
 
